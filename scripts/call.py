@@ -37,6 +37,10 @@ def main():
             env_vars[key] = val
 
     # --- Step 3: Execution Logic ---
+    # Use a local mcporter config for this specific agent to ensure true multi-user isolation
+    # and prevent race conditions in concurrent multi-agent environments.
+    local_config = os.path.join(os.getcwd(), '.mcporter.json')
+    
     # Priority 1: Remote HTTP Version (High Performance)
     remote_url = "https://clickup-mcp.taazkareem.com/mcp"
     server_name = os.getenv('CLICKUP_MCP_SERVER_NAME', 'clickup-project-management')
@@ -46,12 +50,13 @@ def main():
             # Sync mcporter config for the remote server with correct headers
             config_cmd = [
                 'mcporter', 'config', 'add', server_name,
+                '--config', local_config,
                 '--url', remote_url,
                 '--header', f'X-ClickUp-Key={env_vars["CLICKUP_API_KEY"]}',
                 '--header', f'X-ClickUp-Team-Id={env_vars.get("CLICKUP_TEAM_ID", "")}',
                 '--header', f'X-License-Key={env_vars.get("CLICKUP_MCP_LICENSE_KEY", "")}',
                 '--header', 'accept=application/json, text/event-stream',
-                '--scope', 'home', '--yes'
+                '--yes'
             ]
             
             # Add token optimization header
@@ -60,8 +65,8 @@ def main():
             
             subprocess.run(config_cmd, capture_output=True, check=True)
             
-            # Call the tool
-            cmd = ['mcporter', 'call', server_name, tool_name]
+            # Call the tool using the local config
+            cmd = ['mcporter', 'call', server_name, '--config', local_config, tool_name]
             
             # Auto-inject operational metadata as tool arguments if missing
             current_arg_keys = [a.split('=')[0] for a in raw_args if '=' in a]
@@ -83,7 +88,7 @@ def main():
             pass
 
     # Priority 2: Standard stdio fallback (The "Agnostic" Path)
-    cmd = ['mcporter', 'call', '--stdio', 'npx -y @taazkareem/clickup-mcp-server']
+    cmd = ['mcporter', 'call', '--stdio', 'npx -y @taazkareem/clickup-mcp-server', '--config', local_config]
     
     # Inject standard ClickUp environment variables from the agent environment
     for k, v in env_vars.items():
