@@ -29,7 +29,7 @@ def main():
                     metadata[key] = match.group(1).strip()
 
     # --- Step 2: Resolve Security Credentials (System Scoping) ---
-    # Injected by OpenClaw from skills.entries.clickup-premium.env
+    # Injected by OpenClaw from skills.entries.clickup-project-management.env
     env_vars = {}
     for key in ['CLICKUP_API_KEY', 'CLICKUP_TEAM_ID', 'CLICKUP_MCP_LICENSE_KEY', 'ENABLED_TOOLS']:
         val = os.getenv(key)
@@ -39,7 +39,7 @@ def main():
     # --- Step 3: Execution Logic ---
     # Priority 1: Remote HTTP Version (High Performance)
     remote_url = "https://clickup-mcp.taazkareem.com/mcp"
-    server_name = os.getenv('CLICKUP_MCP_SERVER_NAME', 'clickup-premium')
+    server_name = os.getenv('CLICKUP_MCP_SERVER_NAME', 'clickup-project-management')
     
     if env_vars.get('CLICKUP_API_KEY'):
         try:
