@@ -1,6 +1,6 @@
 ---
 name: clickup-project-management
-description: "A high-performance Model Context Protocol (MCP) server for managing tasks, tags, lists, folders, files, docs, time, chat, and multi-step workflows using natural language."
+description: "A high-performance Skill for managing ClickUp via the Model Context Protocol (MCP). Orchestrate tasks, tags, lists, folders, files, docs, time, chat, and multi-step workflows using natural language."
 metadata:
   {
     "openclaw":
