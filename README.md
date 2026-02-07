@@ -1,28 +1,27 @@
-# ClickUp MCP Premium Skill for OpenClaw (WIP)
+# ClickUp Project Management Skill for OpenClaw
 
-This repository contains the `clickup-premium` skill for OpenClaw, designed to work with the [ClickUp MCP Server - Premium](https://github.com/taazkareem/clickup-mcp-server).
+This repository contains the `clickup-project-management` skill for OpenClaw, designed to work with the [ClickUp MCP Server - Premium](https://github.com/taazkareem/clickup-mcp-server).
 
 ## Installation
 
-You can install this skill in OpenClaw by running:
+You can install this skill in OpenClaw via ClawHub or by running:
 
 ```bash
-openclaw skills install https://github.com/taazkareem/clickup-premium-skill/tree/main/clickup-premium
+openclaw skills install https://github.com/taazkareem/clickup-project-management
 ```
 
 ## Features
 
-- **Advanced Hierarchy Discovery**: Quickly find Spaces, Folders, and Lists.
-- **Smart Task Lookup**: Resolve task IDs automatically from names.
-- **Time Tracking**: Start, stop, and log time directly from chat.
-- **ClickUp Docs**: Create and edit documents with markdown support.
-- **Feedback Integration**: Easily report bugs or request features.
+- **High-Performance Orchestration**: Advanced task automation, hierarchy management, and team collaboration.
+- **Context-Aware Scoping**: Automatically pulls `teamId` and `listId` from your workspace `TOOLS.md`.
+- **Dynamic Tool Discovery**: Uses `mcporter` to expose the full ClickUp toolset (Tasks, Folders, Lists, Docs, Time, Chat).
+- **Remote-First Execution**: Prioritizes low-latency remote execution with local `npx` fallback.
 
 ## Requirements
 
-- [ClickUp MCP Server - Premium](https://github.com/taazkareem/clickup-mcp-server) configured in `mcporter`.
-- A valid ClickUp API Key and Team ID.
-- A ClickUp MCP License Key.
+- [mcporter](https://mcporter.dev) installed (automatically handled by the skill).
+- A valid ClickUp API Key.
+- (Optional) ClickUp Team ID and MCP License Key.
 
 ## License
 
